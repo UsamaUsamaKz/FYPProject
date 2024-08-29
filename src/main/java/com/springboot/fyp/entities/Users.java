@@ -108,8 +108,17 @@ public class Users {
         return role;
     }
 
-    public void setRole(String role) {
+    public TestResult getTestresult() {
+		return testresult;
+	}
+
+	public void setTestresult(TestResult testresult) {
+		this.testresult = testresult;
+	}
+
+	public void setRole(String role) {
         this.role = role;
     }
+    
 }
 

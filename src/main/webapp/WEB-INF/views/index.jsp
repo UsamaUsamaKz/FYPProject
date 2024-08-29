@@ -8,6 +8,8 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Plus Jakarta Sans:wght@400;600;700&display=swap"
     />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
   </head>
   <body>
     <div class="desktop-1">
@@ -20,7 +22,9 @@
       <div class="desktop-1-child3"></div>
       <div class="desktop-1-child4"></div>
       <b class="welcome-job-seeker">Welcome, Job Seeker!</b>
-      <div class="search-jobs">Search Jobs</div>
+      <div class="search-jobs">Search Jobs 
+      <span class="material-icons search-icon">search</span>
+      </div>
       <div class="div">27</div>
       <div class="div1">28</div>
       <div class="div2">29</div>
@@ -94,7 +98,8 @@
       <div class="desktop-1-child5"></div>
       <div class="desktop-1-child6"></div>
       <div class="desktop-1-child7"></div>
-      <div class="desktop-1-child8"></div>
+      <div class="desktop-1-child8">        <i class="material-icons arrow-icon">arrow_forward</i>
+      </div>
       <div class="desktop-1-child9"></div>
       <div class="desktop-1-child10"></div>
       <div class="desktop-1-child11"></div>
@@ -176,7 +181,7 @@
 
       <img class="desktop-1-child20" alt="" src="./public/arrow-1.svg" />
 
-      <img class="search-icon" alt="" src="${pageContext.request.contextPath}/image/2.jpeg" />
+      <img class="search-icon" alt="" src="${pageContext.request.contextPath}/image/search.png" />
 
       <img class="images-icon" alt="" src="${pageContext.request.contextPath}/image/1.jpeg" />
     </div>
