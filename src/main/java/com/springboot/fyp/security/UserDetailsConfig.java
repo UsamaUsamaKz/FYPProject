@@ -9,18 +9,22 @@ import org.springframework.stereotype.Service;
 import com.springboot.fyp.dao.UserRepo;
 import com.springboot.fyp.entities.CustomUserDetails;
 import com.springboot.fyp.entities.Users;
+
 @Service("userDetailsService")
-public class UserDetailsConfig  implements UserDetailsService {
+public class UserDetailsConfig implements UserDetailsService {
 	@Autowired
 	UserRepo dao;
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-       Users user=dao.findByEmail(email);
-       System.out.println(user.getEmail()+"==========================================================");
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		System.out.println("Custom UserDetailsService is being called...");
 
-        if (user.equals(null)) throw new UsernameNotFoundException("username not Found");
+		Users user = dao.findByEmail(email);
+		if (user == null) {
+			throw new UsernameNotFoundException("User not found");
+		} else {
+			return new CustomUserDetails(user);
+		}
 
-        return new CustomUserDetails(user);
-    }
+	}
 }
