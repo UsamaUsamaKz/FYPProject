@@ -1,6 +1,7 @@
 package com.springboot.fyp.validationmapper;
 
 public class RegistrationMapper {
+	
 	private String name;
 	private String formemail;
 	private String formpassword;

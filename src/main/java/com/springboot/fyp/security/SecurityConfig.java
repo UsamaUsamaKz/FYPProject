@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @EnableWebSecurity
@@ -34,6 +35,9 @@ public class SecurityConfig {
 						.requestMatchers(new MvcRequestMatcher(introspector, "/js/**")).permitAll()
 						.requestMatchers(new MvcRequestMatcher(introspector, "/images/**")).permitAll()
 						.requestMatchers(new MvcRequestMatcher(introspector, "/WEB-INF/views/login.jsp")).permitAll()
+						.requestMatchers(new MvcRequestMatcher(introspector, "/logincontroller/signup")).permitAll()
+						.requestMatchers(new MvcRequestMatcher(introspector, "/logincontroller/process")).permitAll()
+
 						.anyRequest().authenticated())
 				.formLogin(form -> form.loginPage("/logincontroller/login").permitAll()
 						.loginProcessingUrl("/homecontroller/home").usernameParameter("email")

@@ -6,24 +6,22 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.springboot.fyp.entities.Users;
-import com.springboot.fyp.servieslayer.ServiceLayer;
+import com.springboot.fyp.servieslayer.UserServicelayer;
 
 @Component
 public class UserValidator implements Validator {
 	
 	@Autowired
-	private ServiceLayer userService;
+	private UserServicelayer userService;
 
 	@Override
 	public boolean supports(Class<?> aClass) {
-		return Users.class.equals(aClass);
+		return RegistrationMapper.class.equals(aClass);
 	}
 
 	@Override
 	public void validate(Object o, Errors errors) {
 		RegistrationMapper registrationMapper = (RegistrationMapper) o;
-
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "formemail", "NotEmpty");
 		if (registrationMapper.getFormemail().length() < 6 || registrationMapper.getFormemail().length() > 32) {
 			errors.rejectValue("formemail", "Size.userForm.formemail");
@@ -40,7 +38,7 @@ public class UserValidator implements Validator {
 		if (!registrationMapper.getPasswordConfirm().equals(registrationMapper.getFormpassword())) {
 			errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
 		}
-		if (registrationMapper.getName().length() < 3 || registrationMapper.getName().length() > 32) {
+		if (registrationMapper.getName().equals(null)  || registrationMapper.getName().length() < 3 || registrationMapper.getName().length() > 32) {
 			errors.rejectValue("name", "Size.userForm.name");
 		}
 		if (registrationMapper.getPhoneNo().length() < 11 || registrationMapper.getPhoneNo().length() > 12) {

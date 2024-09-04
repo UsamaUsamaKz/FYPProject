@@ -6,4 +6,5 @@ import com.springboot.fyp.entities.Users;
 
 public interface UserRepo extends CrudRepository<Users, Integer> {
     Users findByEmail(String name);
+    boolean existsByEmail(String email);
 }

@@ -1,16 +1,27 @@
 <html lang="zxx">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page isELIgnored="false"%>
 <c:url var="postloginUrl" value="/homecontroller/home" />
+<c:url var="postsignupUrl" value="/logincontroller/process" />
 
 <link rel="stylesheet"
 	href="<c:url value='${pageContext.request.contextPath}/css/login.css' />"
 	type="text/css" media="all" />
 <style>
+.error {
+	color: red;
+	font-size: 12px;
+}
+
+.short {
+	color: red;
+}
+
 .input-error {
 	border-bottom: 1px solid rgba(255, 0, 0, 0.4);
 }
@@ -18,9 +29,10 @@
 <body>
 	<br>
 	<br>
-	<div class="cont">
-		<div class="form sign-in">
-			<form action="${postloginUrl}" method="POST">
+	<div
+		class="cont  <c:if test="${formtype == 'signup'}">s--signup</c:if>">
+		<div class="form sign-in ">
+			<form autocomplete="off" action="${postloginUrl}" method="POST">
 				<h2>Welcome</h2>
 				<label> <span>Email</span> <input placeholder="Enter Email"
 					name="email" id="email" type="email" required
@@ -34,7 +46,7 @@
 			</form>
 		</div>
 
-		<div class="sub-cont">
+		<div class="sub-cont ">
 			<div class="img">
 				<div class="img__text m--up">
 					<h3>Don't have an account? Please Sign up!</h3>
@@ -48,14 +60,55 @@
 				</div>
 			</div>
 
-			<form class="form sign-up">
+			<form:form autocomplete="off" method="POST" action="${postsignupUrl}"
+				modelAttribute="userForm" class="form sign-up">
 				<h2>Create your Account</h2>
-				<label> <span>Name</span> <input type="text" />
-				</label> <label> <span>Email</span> <input type="email" />
-				</label> <label> <span>Password</span> <input type="password" />
+
+				<label> <spring:bind path="name">
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<form:input type="text" path="name" class="form-control"
+								placeholder="Username" autofocus="true"></form:input>
+							<form:errors path="name"></form:errors>
+						</div>
+					</spring:bind>
 				</label>
+
+				<label> <spring:bind path="formemail">
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<form:input type="formemail" path="formemail"
+								class="form-control" placeholder="Enter Email"></form:input>
+							<form:errors path="formemail"></form:errors>
+						</div>
+					</spring:bind>
+				</label>
+				<label> <spring:bind path="phoneNo">
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<form:input type="phoneNo" path="phoneNo" class="form-control"
+								placeholder="Enter Phone Number"></form:input>
+							<form:errors path="phoneNo"></form:errors>
+						</div>
+					</spring:bind>
+				</label>
+				<label> <spring:bind path="formpassword">
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<form:input type="password" path="formpassword"
+								class="form-control" placeholder="Password"></form:input>
+							<form:errors path="formpassword"></form:errors>
+						</div>
+					</spring:bind>
+				</label>
+				<label> <spring:bind path="passwordConfirm">
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<form:input type="password" path="passwordConfirm"
+								class="form-control" placeholder="Confirm Password"></form:input>
+							<form:errors path="passwordConfirm"></form:errors>
+						</div>
+					</spring:bind>
+				</label>
+
 				<button type="submit" class="submit">Sign Up</button>
-			</form>
+			</form:form>
+
 		</div>
 	</div>
 
